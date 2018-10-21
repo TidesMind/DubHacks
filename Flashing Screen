@@ -1,0 +1,45 @@
+import pygame
+from PIL import Image
+import glob
+
+pygame.init()
+
+display_width = 800
+display_height = 600
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
+img1 = pygame.image.load('Image1.png')
+
+image_list = []
+for filename in glob.glob('/Users/FredQ/PycharmProjects/Yolo/*.png'):
+    im = pygame.image.load(filename)
+    print(1)
+    image_list.append(im)
+
+
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption("hi")
+clock = pygame.time.Clock()
+
+crashed = False
+
+while not crashed:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            crashed = True
+
+            print(event)
+
+    for im in image_list:
+        gameDisplay.blit(im, (0, 0))
+        pygame.display.flip()
+        pygame.time.wait(2000)
+
+    pygame.display.update()
+    clock.tick(60)
+
+pygame.quit()
+quit()
+
